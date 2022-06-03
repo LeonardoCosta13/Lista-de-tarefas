@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <div></div>
+        <h1>Lista de Tarefas</h1>
+        <h2>Formulário</h2>
+    </div>
+
+    <div>
+    <fieldset>
+        
+
+        <div>
+            <label><strong>Digite sua tarefa</strong></label>
+            <input id="texto" type="text" placeholder="Digite sua tarefa">  
+         <div>
+
+        <div>
+            <button id="adicionar">Adicionar</button>
+            <button id="excluir">Excluir</button>
+
+
+        </div>
+
+        <h2><strong>Lista de tarefas</strong></h2>
+
+            <ol id="lista">
+                <li></li>
+            </ol>
+        </form>
+    </fieldset>
+</body>
+
+<script>
+
+    var arrayTarefas = [];
+    var Altera_indice;
+    // document.addEventListener("keypress", function(e){
+    //     if(e.key == "Enter"){
+    //    //     adicionar();
+    //     }
+    // });
+       function validar(){
+           const btn = document.getElementById("texto");
+        if(btn.value == null || btn.value == ""){
+            alert("Digite sua tarefa");
+        }else{
+                adicionar();
+            }  
+        };
+        function excluir(){
+            var indice = prompt("Insira o ID do item que voce quer excluir")
+
+        }
+
+    function adicionar() {
+        let text = document.getElementById("texto").value;
+        
+        if(Altera_indice > 0){
+            arrayTarefas[Altera_indice] = text;
+            Altera_indice = undefined;
+
+        }else{
+            arrayTarefas.push(text)
+        }
+
+        document.getElementById("texto").value   = '';
+
+
+        atualizarLista();
+        // list +="<li>" +text+ " <button id='excluir' type='reset'><i class='bx bx-trash'></i></button></li>"
+
+        // document.getElementById("lista").innerHTML = list;
+        // document.getElementById("texto").value = null;
+        
+    }
+
+    function deletar(indice){
+        delete arrayTarefas[indice];
+        atualizarLista();
+    }
+
+    function alterar(indice){
+        Altera_indice = indice;
+        document.getElementById("texto").value = arrayTarefas[indice];
+    }
+
+    function atualizarLista(){
+        let lista = '<table><tr> <td>Descrição</td> <td>Excluir</td> </tr>';
+        arrayTarefas.forEach((texto, indice)=>{
+            lista +=  "<tr><td>"+texto+"</td>";
+            lista +=  "<td> <a href='javascript:deletar("+indice+")'>Deletar</a> </td>";
+            lista +=  "<td> <a href='javascript:alterar("+indice+")'>Alterar</a> </td>";
+            lista +=  "</tr>"
+        });
+        lista +=  "</table>"
+        document.getElementById("lista").innerHTML = lista;        
+    }
+    const btnadicionar = document.querySelector("#adicionar");
+    btnadicionar.addEventListener("click", function(e){
+       adicionar(); 
+    });
+   //document.querySelector("#excluir > i")
+
+</script>
+</html>
